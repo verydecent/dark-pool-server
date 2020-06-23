@@ -23,6 +23,6 @@ app.get('/', (req, res) => {
   res.send('API success');
 });
 
-app.listen(2000, () =>
-  console.log('App listening on Port 2000')
+app.listen(process.env.PORT, () =>
+  console.log(`App listening on Port ${process.env.PORT}`)
 );
