@@ -13,11 +13,16 @@ mongoose.connection.on('error', err => {
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import routes from './routes';
 
 const app = express();
 
 // Application level middleware
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/anotherRoute', routes.anotherRoute);
 
 app.get('/', (req, res) => {
   res.send('API success');
