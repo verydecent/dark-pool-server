@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+userSchema.pre('remove', function(next) {
+  this.model('Message').deleteMany({ user: this._id }, next);
+});
+
 const User = mongoose.model('User', userSchema);
 
 export default User;

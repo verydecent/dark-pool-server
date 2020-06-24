@@ -14,6 +14,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import routes from './routes';
+import models, { connectDb } from './models';
 
 const app = express();
 
@@ -28,6 +29,9 @@ app.get('/', (req, res) => {
   res.send('API success');
 });
 
-app.listen(process.env.PORT, () =>
-  console.log(`App listening on Port ${process.env.PORT}`)
-);
+connectDb()
+  .then(async () => {
+    app.listen(process.env.PORT, () =>
+      console.log(`App listening on Port ${process.env.PORT}`)
+    );
+  });
