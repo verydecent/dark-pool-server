@@ -1,13 +1,21 @@
 import mongoose from 'mongoose';
 
 import User from './user';
+import Entry from './entry';
 import Task from './task';
+import Subtask from './subtask';
+
 
 const connectDb = () => {
   return mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
 };
 
-const models = { User, Task };
+const models = {
+  User,
+  Entry,
+  Task,
+  Subtask
+};
 
 export { connectDb };
 
