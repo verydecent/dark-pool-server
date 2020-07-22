@@ -6,10 +6,6 @@ const entrySchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-    date: {
-      type: Date,
-      default: Date.now
-    },
     // Array of task references
     tasks: [
       {
@@ -17,7 +13,8 @@ const entrySchema = new mongoose.Schema(
         ref: 'Task'
       }
     ]
-  }
+  },
+  { timestamps: true }
 );
 
 const Entry = mongoose.model('Entry', entrySchema);
