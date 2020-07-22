@@ -41,7 +41,8 @@ connectDb().then(async () => {
 
 const createUsersWithTasks = async () => {
   const user1 = new models.User({
-    username: 'admin'
+    username: 'admin',
+    email: 'dp_admin@mail.com'
   });
 
   const task1 = new models.Task({
