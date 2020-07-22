@@ -45,21 +45,42 @@ const createUsersWithTasks = async () => {
   });
 
   const task1 = new models.Task({
-    text: 'Read Flower for Algernon',
-    user: user1.id
+    title: 'Organize Room',
+    description: 'Room became messy for the past few weeks, clean up by tonight!',
+    subtasks: [
+      /*
+      {
+        description: 'Mop floor',
+        complete: false
+      },
+      {
+        description: 'Wipe desk with disinfectant',
+        complete: false
+      },
+      {
+        description: 'Laundry',
+        complete: false
+      },
+      {
+        description: 'Wipe windows',
+        complete: true
+      }
+      */
+    ]
+    // user: user1.id
   });
 
-  const user2 = new models.User({
-    username: 'user'
-  });
+  // const user2 = new models.User({
+  //   username: 'user'
+  // });
 
-  const task2 = new models.Task({
-    text: 'Read Flower for Algernon',
-    user: user2.id
-  });
+  // const task2 = new models.Task({
+  //   text: 'Read Flower for Algernon',
+  //   user: user2.id
+  // });
 
   await task1.save();
   await user1.save();
-  await task2.save();
-  await user2.save();
+  // await task2.save();
+  // await user2.save();
 }
