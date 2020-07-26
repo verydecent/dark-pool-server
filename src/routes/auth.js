@@ -1,11 +1,8 @@
 import { Router } from 'express';
+import { register } from '../controllers/auth';
 
 const router = Router();
 
-router.get('/register', (req, res) => {
-  res.json({
-    data: 'Registration endpoint'
-  });
-});
+router.get('/register', register);
 
 export default router;

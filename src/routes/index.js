@@ -1,9 +1,9 @@
-import anotherRoute from './another';
-import taskRoute from './task';
-import authRoute from './auth';
+import another from './another';
+import task from './task';
+import auth from './auth';
 
 export default {
-  anotherRoute,
-  taskRoute,
-  authRoute,
+  another,
+  task,
+  auth,
 }
