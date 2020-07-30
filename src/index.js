@@ -12,7 +12,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/anotherRoute', routes.another);
 app.use('/task', routes.task);
 app.use('/auth', routes.auth);
 
@@ -22,17 +21,17 @@ app.get('/', (req, res) => {
 
 // Reinitialize database if set to true
 
-const eraseDatabaseOnSync = true;
+// const eraseDatabaseOnSync = true;
 
 connectDb().then(async () => {
-  if (eraseDatabaseOnSync) {
-    await Promise.all([
-      models.User.deleteMany({}),
-      models.Task.deleteMany({})
-    ]);
-  }
+  // if (eraseDatabaseOnSync) {
+  //   await Promise.all([
+  //     models.User.deleteMany({}),
+  //     models.Task.deleteMany({})
+  //   ]);
+  // }
 
-  createUsersWithTasks();
+  // createUsersWithTasks();
 
   app.listen(process.env.PORT, () =>
     console.log(`App listening on Port ${process.env.PORT}`));
@@ -82,8 +81,8 @@ const createUsersWithTasks = async () => {
   //   user: user2.id
   // });
 
-  await task1.save();
-  await user1.save();
+  // await task1.save();
+  // await user1.save();
   // await task2.save();
   // await user2.save();
 }
