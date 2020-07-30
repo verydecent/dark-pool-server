@@ -1,18 +1,16 @@
 import mongoose from 'mongoose';
 
-const taskSchema = new mongoose.Schema(
-  {
+const taskSchema = new mongoose.Schema({
     title: {
       type: String
     },
     description: {
       type: String
     },
-    subtasks: [
-      {
-        type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
       }
-    ]
   },
   { timestamps: true }
 );
