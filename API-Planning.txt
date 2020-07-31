@@ -1,3 +1,69 @@
 API Planning
 
+Upon logging in, user is presented with current date. There will be no data yet.
 
+Upon creating a task for a date with no data, we will create an date entry and create the task.
+
+This will hit a Task Route whose first code will run an if else statement checking if the combination of the user id and the data has an entry. If it doesn't then it will create an entry and create a task for that entry.
+
+The user will then write subtasks for that entry and then make a post request with the tasks id, adding the subtask to that task id. 
+
+
+After writing this, I'm wondering if an entry model is necessary. It will make it easier to grab all entries when looking at graph data...
+
+
+
+
+POST
+- Task -> Entry with Date + User Id exist?
+          Yes -> Create Task, Add Task Id to existing Entry
+          No -> Create Task, Create Entry and add Task Id to that Entry
+
+- Subtask -> Use Task Id, find it through DB then Add Subtask to that Task Id
+
+
+
+
+
+
+
+
+
+Get Entry by date which will contain all tasks and its subtasks
+
+
+
+
+
+
+
+New Date
+
+
+
+Click Create Task
+
+  If Entry exists, 
+
+
+State will contain the id of current Entry.
+State also holds the array of tasks and its respective subtasks
+If state is empty, then we must create Task.
+
+
+
+So upon loading, componentDidMount will always make a retrieval request to fill the state with the tasks.
+
+So are we making a request based on entry?
+
+So make GET request for entry.
+  Response with...
+    Null
+    Or with existant entries
+
+
+
+    From here...
+
+      If we don't have any entries.... We will make one by creating a task.....
+      .... tbc
