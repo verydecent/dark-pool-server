@@ -12,8 +12,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/task', routes.task);
 app.use('/auth', routes.auth);
+app.use('/task', routes.task);
+app.use('/subtask', routes.subtask);
 
 app.get('/', (req, res) => {
   res.send('API 200');
