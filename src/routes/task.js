@@ -34,4 +34,18 @@ router.put('/:task_id', (req, res) => {
   });
 });
 
+router.delete('/:task_id', (req, res) => {
+
+  models.Task.findOne({ _id: req.params.task_id }, function(err, doc) {
+    if (err || !doc) {
+      return res.status(400).json(err);
+    }
+
+    doc.remove(function(err, doc) {
+      if (err) res.status(500).json(err);
+      res.status(200).json(doc);
+    });
+  });
+});
+
 export default router;
