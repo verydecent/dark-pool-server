@@ -17,3 +17,5 @@ router.post('/', (req, res) => {
         res.status(200).json(doc);
     })
 })
+
+export default router;
