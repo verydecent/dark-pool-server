@@ -3,13 +3,13 @@ import models from '../models';
 
 const router = Router();
 
-router.post('/', (req, res) => {
+router.post('/:task_id', (req, res) => {
     console.log('=== req.body ===', req.body);
 
     const newSubtask = new models.Subtask({
-        complete: req.body.complete,
-        description: req.body.description,
-        task_id: req.body.task_id
+        complete: false,
+        description: '',
+        task_id: req.params.task_id
     });
 
     newSubtask.save(function(err, doc) {
@@ -26,5 +26,33 @@ router.get('/:task_id', (req, res) => {
         res.status(200).json(doc);
     })
 });
+
+router.get('/single/:subtask_id', (req, res) => {
+    models.Subtask.find({ _id: req.params.subtask_id }, function(err, doc) {
+        if (err) res.status(500).json(err);
+        res.status(200).json(doc);
+    })
+})
+
+router.put('/:subtask_id', (req, res) => {
+    models.Subtask.findByIdAndUpdate(req.params.subtask_id, req.body, { new: true }, function(err, doc) {
+        if (err) res.status(500).json(err)
+        console.log(doc);
+        res.status(200).json(doc);
+    });
+});
+
+router.delete('/:subtask_id', (req, res) => {
+    models.Subtask.findOne({ _id: req.params.subtask_id }, function(err, doc) {
+      if (err || !doc) {
+        return res.status(400).json(err);
+      }
+  
+      doc.remove(function(err, doc) {
+        if (err) res.status(500).json(err);
+        res.status(200).json(doc);
+      });
+    });
+  });
 
 export default router;
