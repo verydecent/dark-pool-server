@@ -16,7 +16,7 @@ app.use('/task', routes.task);
 app.use('/auth', routes.auth);
 
 app.get('/', (req, res) => {
-  res.send('API success');
+  res.send('API 200');
 });
 
 // Reinitialize database if set to true
