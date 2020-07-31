@@ -22,15 +22,16 @@ app.get('/', (req, res) => {
 
 // Reinitialize database if set to true
 
-// const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = true;
 
 connectDb().then(async () => {
-  // if (eraseDatabaseOnSync) {
-  //   await Promise.all([
-  //     models.User.deleteMany({}),
-  //     models.Task.deleteMany({})
-  //   ]);
-  // }
+  if (eraseDatabaseOnSync) {
+    await Promise.all([
+      // models.User.deleteMany({}),
+      models.Task.deleteMany({}),
+      models.Subtask.deleteMany({})
+    ]);
+  }
 
   // createUsersWithTasks();
 
