@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Router } from 'express';
 import models from '../models';
 
-const router = mongoose.router();
+const router = Router();
 
 router.post('/', (req, res) => {
     console.log('=== req.body ===', req.body);
@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
     newSubtask.save(function(err, doc) {
         if (err) res.status(500).json(err);
         res.status(200).json(doc);
-    })
-})
+    });
+});
 
 export default router;
