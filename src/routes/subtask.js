@@ -18,4 +18,13 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/:task_id', (req, res) => {
+    console.log('req.params', req.params);
+    models.Subtask.find({ task_id: req.params.task_id }, function(err, doc) {
+        if (err) res.status(500).json(err);
+        console.log(doc);
+        res.status(200).json(doc);
+    })
+});
+
 export default router;
