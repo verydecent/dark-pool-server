@@ -8,17 +8,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-
-  console.log('===== Task Post Request Body =====', req.body);
-  
   const newTask = new models.Task({
-    title: req.body.title,
-    description: req.body.description,
-    subtasks: req.body.subtasks
+    user_id: req.body.user_id,
+    title: '',
+    description: ''
   });
- console.log(newTask); 
-  res.json('working')  
-  
+
+  newTask.save(function(err, doc) {
+    if (err) return res.status(500).json(err);
+    res.status(200).json({ data: doc });
+  });
 });
 
 export default router;
