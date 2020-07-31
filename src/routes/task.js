@@ -8,15 +8,16 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log('POST request for TASK', req.body);
   const newTask = new models.Task({
     user_id: req.body.user_id,
-    title: '',
-    description: ''
+    title: req.body.title,
+    description: req.body.title
   });
 
   newTask.save(function(err, doc) {
     if (err) return res.status(500).json(err);
-    res.status(200).json({ data: doc });
+    res.status(200).json(doc);
   });
 });
 
