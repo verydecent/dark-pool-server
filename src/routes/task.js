@@ -3,20 +3,33 @@ import models from '../models';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.json('get task 200');
+router.get('/:user_id', (req, res) => {
+  models.Task.find({ user_id: req.params.user_id }, function(err, doc) {
+      if (err) res.status(500).json(err);
+      res.status(200).json(doc);
+  })
 });
 
 router.post('/', (req, res) => {
   console.log('POST request for TASK', req.body);
   const newTask = new models.Task({
     user_id: req.body.user_id,
-    title: req.body.title,
-    description: req.body.title
+    title: '',
+    description: ''
   });
 
   newTask.save(function(err, doc) {
     if (err) return res.status(500).json(err);
+    res.status(200).json(doc);
+  });
+});
+
+router.put('/:task_id', (req, res) => {
+  console.log('PUT request for TASK', req.body);
+
+  models.Task.findByIdAndUpdate(req.params.task_id, req.body, { new: true }, function(err, doc) {
+    if (err) res.status(500).json(err);
+    console.log('~~~ PUT document ~~~');
     res.status(200).json(doc);
   });
 });
