@@ -1,16 +1,16 @@
 import mongoose from 'mongoose';
 
 const subtaskSchema = new mongoose.Schema({
-    description: {
-      type: String
-    },
-    complete: {
-      type: Boolean
-    },
-    task_id: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Task'
-    }
+  task_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Task'
+  },
+  complete: {
+    type: Boolean
+  },
+  description: {
+    type: String
+  }
   },
   { timestamps: true }
 );
