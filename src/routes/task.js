@@ -35,7 +35,7 @@ router.put('/:task_id', (req, res) => {
 });
 
 router.delete('/:task_id', (req, res) => {
-
+  console.log('task delete route', req.params.task_id);
   models.Task.findOne({ _id: req.params.task_id }, function(err, doc) {
     if (err || !doc) {
       return res.status(400).json(err);
