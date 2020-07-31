@@ -67,3 +67,17 @@ So make GET request for entry.
 
       If we don't have any entries.... We will make one by creating a task.....
       .... tbc
+
+
+
+
+API
+
+[x] GET Tasks by user
+[x] GET Subtasks by Task Id
+[x] POST Task
+[x] POST Subtask
+[x] PUT Task
+[] PUT Subtask
+[] Delete Task
+[] Delete Subtask
