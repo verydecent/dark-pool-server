@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 import User from './user';
-import Entry from './entry';
 import Task from './task';
 import Subtask from './subtask';
 
@@ -12,7 +11,6 @@ const connectDb = () => {
 
 const models = {
   User,
-  Entry,
   Task,
   Subtask
 };
