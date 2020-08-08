@@ -11,7 +11,7 @@ const app = express();
 
 // app.use(cors()); // Allows all origins
 if (process.env.ENVIRONMENT === 'development') {
-  app.use(cors({ origin: 'http://localhost:1024' }));
+  app.use(cors({ origin: ['http://localhost:1024', 'https://postwoman.io'] }));
 }
 app.use(morgan('dev'));
 app.use(express.json());
