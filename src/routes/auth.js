@@ -4,6 +4,10 @@ import { register } from '../controllers/auth';
 
 const router = Router();
 
+router.get('/', (req, res) => {
+  res.json({ message: 'Auth Route Get Success' });
+});
+
 router.post('/register', (req, res) => {
 
 
@@ -26,12 +30,6 @@ router.post('/register', (req, res) => {
     if (err) return res.status(500).json(err);
     res.status(200).json(doc);
   })
-});
-  
-  
-
-router.get('/test', (req, res) => {
-  res.json({ message: 'something bad inide is happening' });
 });
 
 export default router;

@@ -9,7 +9,7 @@ const app = express();
 
 // Application level middleware
 
-app.use(cors());
+app.use(cors()); // Allows all origins
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
