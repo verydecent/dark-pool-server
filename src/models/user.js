@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
       type: String,
       required: true,
       trim: true,
@@ -68,7 +69,7 @@ userSchema.methods = {
     }
   },
   makeSalt: function() {
-    return Math.round(new Date().valueOf() * Math.random())
+    return Math.round(new Date().valueOf() * Math.random());
   }
 };
 
