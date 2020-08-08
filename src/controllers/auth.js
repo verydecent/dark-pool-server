@@ -1,21 +1,23 @@
+import models from '../models';
+
 export const register = (req, res) => {
-  try {
-    const { email, password, passwordConfirm, username } = req.body;
+  // Create user id
+  // username
+  // email
+  // passwords
 
-    if (!email || !password || !passwordConfirm) {
-      return res.status(400).json({ message: 'Missing one or more required fields' });
-    }
+  console.log('====auth====', req.body);
 
-    if (passowrd.length < 5) {
-      return res.status(400).json({ message: 'The password needs to be at least 5 characters long' });
-    }
-    
-    if (password !== passwordConfirm) {
-      return res.status(400).json({ message: 'The password and password confirm do not match' });
-    }
-  }
-  catch (err) {
-   res.status(500).json(err); 
-  }
-  return res.json({ data: 'Register endpoint from controllers folder' });
+  const newUser = new models.User({
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password
+  });
+
+  console.log('newUser', newUser);
+
+  newUser.save(function(err, doc) {
+    if (err) return res.status(500).json(err);
+    res.status(200).json(doc);
+  });
 };
