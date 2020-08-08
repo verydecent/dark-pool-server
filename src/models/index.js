@@ -8,7 +8,7 @@ import Subtask from './subtask';
 const connectDb = () => {
   return mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    findAndModify: true,
+    useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
