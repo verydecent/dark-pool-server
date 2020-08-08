@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
+// Virtual fields
+// Never saved onto database
+
 userSchema
   .virtual('password')
   .set(function(password) {
