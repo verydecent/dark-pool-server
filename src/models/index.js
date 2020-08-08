@@ -6,7 +6,12 @@ import Subtask from './subtask';
 
 
 const connectDb = () => {
-  return mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
+  return mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    findAndModify: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+  });
 };
 
 const models = {
