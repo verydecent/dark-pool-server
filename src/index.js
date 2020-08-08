@@ -9,7 +9,10 @@ const app = express();
 
 // Application level middleware
 
-app.use(cors()); // Allows all origins
+// app.use(cors()); // Allows all origins
+if (process.env.ENVIRONMENT === 'development') {
+  app.use(cors({ origin: 'http://localhost:1024' }));
+}
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
