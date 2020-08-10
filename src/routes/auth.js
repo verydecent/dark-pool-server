@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import models from '../models';
-import { register } from '../controllers/auth';
-import { userRegistrationValidator } from '../validators/auth';
+import { register, login, accountActivation } from '../controllers/auth';
+import { userRegistrationValidator, userLoginValidator } from '../validators/auth';
 import { runValidation } from '../validators';
 
 const router = Router();
@@ -11,5 +11,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register', userRegistrationValidator, runValidation, register);
+
+router.post('/account-activation', accountActivation);
+
+router.post('/login', userLoginValidator, runValidation, login);
 
 export default router;
