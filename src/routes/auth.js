@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import models from '../models';
 import { register, login, accountActivation } from '../controllers/auth';
 import { userRegistrationValidator, userLoginValidator } from '../validators/auth';
 import { runValidation } from '../validators';
