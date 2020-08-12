@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/auth', routes.auth);
 app.use('/task', routes.task);
 app.use('/subtask', routes.subtask);
+app.use('/user', routes.user);
 
 app.get('/', (req, res) => {
   res.send('API 200');
