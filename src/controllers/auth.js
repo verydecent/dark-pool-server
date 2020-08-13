@@ -17,7 +17,7 @@ export const forgotPassword = (req, res) => {
       });
     }
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' });
+    const token = jwt.sign({ _id: user._id, username: user.username }, process.env.JWT_RESET_PASSWORD, { expiresIn: '10m' });
 
     const emailData = {
       from: process.env.EMAIL_FROM,
@@ -59,6 +59,7 @@ export const forgotPassword = (req, res) => {
 }
 
 export const resetPassword = (req, res) => {
+  console.log('Reset Password Route')
   const { resetPasswordLink, newPassword } = req.body;
 
   if (resetPasswordLink) {
