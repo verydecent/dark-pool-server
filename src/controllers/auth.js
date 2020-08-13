@@ -4,6 +4,27 @@ import sgMail from '@sendgrid/mail';
 import expressJwt from 'express-jwt';
 sgMail.setApiKey(process.env.SENDGRID_SANDBOX_API_KEY);
 
+// Admin middleware
+
+export const adminMiddleware = (req, res, next) => {
+  models.User.findById({ _id: req.user.id }).exec((err, user) => {
+    if (err ||!user) {
+      return res.status(400).json({
+        error: 'User not found'
+      });
+    }
+
+    if (user.role !== 'admin') {
+      return res.status(400).json({
+        error: 'Admin resource. Access denied'
+      });
+    }
+
+    req.profile = user;
+    next();
+  });
+}
+
 // Middleware that requires JWT and checks if it was from our server
 
 export const requireLogin = expressJwt({
