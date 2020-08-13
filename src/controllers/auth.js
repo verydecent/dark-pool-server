@@ -1,7 +1,45 @@
 import models from '../models';
 import jwt from 'jsonwebtoken';
 import sgMail from '@sendgrid/mail';
+import expressJwt from 'express-jwt';
 sgMail.setApiKey(process.env.SENDGRID_SANDBOX_API_KEY);
+
+// Middleware that requires JWT and checks if it was from our server
+
+export const requireLogin = expressJwt({
+  secret: process.env.JWT_SECRET,
+  algorithms: ['HS256']
+});
+
+export const login = (req, res) => {
+  const { email, password } = req.body;
+
+  models.User.findOne({ email }).exec((err, user) => {
+    // Check if user exist
+    if (err ||!user) {
+      return res.status(400).json({
+        error: 'User with that email does not exist. Please register'
+      });
+    }
+
+    // Authenticate user
+    if (!user.authenticate(password)) {
+      return res.status(400).json({
+        error: 'Email and password does not match'
+      });
+    }
+    
+    // Generate token and send to client if authenticated
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '3d' });
+
+    const { _id, name, email, role } = user;
+
+    return res.json({
+      token,
+      user: { _id, name, email, role }
+    });
+  });
+}
 
 export const register = (req, res) => {
   const { username, email, password } = req.body;
@@ -79,34 +117,4 @@ export const accountActivation = (req, res) => {
       message: 'Server error, please try signing up again'
     });
   }
-}
-
-export const login = (req, res) => {
-  const { email, password } = req.body;
-
-  models.User.findOne({ email }).exec((err, user) => {
-    // Check if user exist
-    if (err ||!user) {
-      return res.status(400).json({
-        error: 'User with that email does not exist. Please register'
-      });
-    }
-
-    // Authenticate user
-    if (!user.authenticate(password)) {
-      return res.status(400).json({
-        error: 'Email and password does not match'
-      });
-    }
-    
-    // Generate token and send to client if authenticated
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '3d' });
-
-    const { _id, name, email, role } = user;
-
-    return res.json({
-      token,
-      user: { _id, name, email, role }
-    });
-  });
 }
