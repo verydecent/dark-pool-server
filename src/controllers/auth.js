@@ -54,11 +54,11 @@ export const login = (req, res) => {
     // Generate token and send to client if authenticated
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '3d' });
 
-    const { _id, name, email, role } = user;
+    const { _id, username, email, role } = user;
 
     return res.json({
       token,
-      user: { _id, name, email, role }
+      user: { _id, username, email, role }
     });
   });
 }
