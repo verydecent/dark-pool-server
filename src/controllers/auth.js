@@ -4,7 +4,8 @@ import sgMail from '@sendgrid/mail';
 import expressJwt from 'express-jwt';
 sgMail.setApiKey(process.env.SENDGRID_SANDBOX_API_KEY);
 
-// Admin middleware
+// Admin middleware 
+// Resources only admin can see
 
 export const adminMiddleware = (req, res, next) => {
   models.User.findById({ _id: req.user.id }).exec((err, user) => {
@@ -16,7 +17,7 @@ export const adminMiddleware = (req, res, next) => {
 
     if (user.role !== 'admin') {
       return res.status(400).json({
-        error: 'Admin resource. Access denied'
+        error: 'Access denied. Admin resource.'
       });
     }
 
