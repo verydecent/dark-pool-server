@@ -4,7 +4,7 @@ export const readUser = (req, res) => {
   const userId = req.params.id;
 
   models.User.findById(userId).exec((err, user) => {
-    console.log('user');
+    console.log('user', req.user);
     if (err || !user) {
       return res.status(400).json({
         error: 'User not found'
@@ -17,3 +17,8 @@ export const readUser = (req, res) => {
     res.json(user);
   });
 };
+
+export const updateUser = (req, res) => {
+  const userId = req.params.id;
+  
+}
