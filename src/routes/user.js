@@ -11,6 +11,6 @@ router.get('/:id', requireLogin, readUser);
 router.put('/', requireLogin, updateUser);
 
 // Update Admin user info
-router.put('/admin/', requireLogin, adminMiddleware, updateUser);
+router.put('/admin', requireLogin, adminMiddleware, updateUser);
 
 export default router;
