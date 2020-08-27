@@ -2,33 +2,33 @@ import mongoose from 'mongoose';
 import crypto from 'crypto';
 
 const userSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true,
-      trim: true,
-      max: 32
-    },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true,
-      lowercase: true
-    },
-    hashed_password: {
-      type: String,
-      required: true
-    },
-    salt: String,
-    role: {
-      type: String,
-      default: 'subscriber'
-    },
-    resetPasswordLink: {
-      data: String,
-      default: ''
-    }
+  username: {
+    type: String,
+    required: true,
+    trim: true,
+    max: 32
   },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true,
+    lowercase: true
+  },
+  hashed_password: {
+    type: String,
+    required: true
+  },
+  salt: String,
+  role: {
+    type: String,
+    default: 'subscriber'
+  },
+  resetPasswordLink: {
+    data: String,
+    default: ''
+  }
+},
   { timestamps: true }
 );
 
@@ -37,8 +37,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema
   .virtual('password')
-  .set(function(password) {
-    
+  .set(function (password) {
+
     // create temporary password variable
     this._password = password;
 
@@ -48,15 +48,15 @@ userSchema
     // encrypt Password
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function() {
+  .get(function () {
     return this._password;
   });
 
 userSchema.methods = {
-  authenticate: function(plainText) {
+  authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password
   },
-  encryptPassword: function(password) {
+  encryptPassword: function (password) {
     if (!password) return '';
     try {
       return crypto
@@ -68,10 +68,14 @@ userSchema.methods = {
       return '';
     }
   },
-  makeSalt: function() {
+  makeSalt: function () {
     return Math.round(new Date().valueOf() * Math.random());
   }
 };
+
+// userSchema.pre('deleteMany', function (next) {
+//   this.model('Task').deleteOne({ user_id: this._id }, next);
+// });
 
 const User = mongoose.model('User', userSchema);
 
