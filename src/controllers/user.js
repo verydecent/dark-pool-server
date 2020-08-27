@@ -42,14 +42,16 @@ export const updateUser = (req, res) => {
       user.username = username;
     }
 
-    if (password.length < 6) {
-      return res.status(400).json({
-        error: 'Passwords length needs to be at least 6 characters long'
-      });
-    }
-    else {
-      // If there is a password, then update the user's password with the new password
-      user.password = password;
+    if (password) {
+      if (password.length < 6) {
+        return res.status(400).json({
+          error: 'Passwords length needs to be at least 6 characters long'
+        });
+      }
+      else {
+        // If there is a password, then update the user's password with the new password
+        user.password = password;
+      }
     }
 
     user.save((err, updatedUser) => {

@@ -11,7 +11,7 @@ const app = express();
 
 // app.use(cors()); // Allows all origins
 if (process.env.ENVIRONMENT === 'development') {
-  app.use(cors({ origin: ['http://localhost:1024', 'https://postwoman.io'] }));
+  app.use(cors({ origin: ['http://localhost:1024', 'https://hoppscotch.io'] }));
 }
 app.use(morgan('dev'));
 app.use(express.json());
@@ -43,7 +43,7 @@ connectDb().then(async () => {
 
   app.listen(process.env.PORT, () =>
     console.log(`App listening on Port ${process.env.PORT}`));
-  }
+}
 );
 
 // Seeds
