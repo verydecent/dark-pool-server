@@ -46,6 +46,8 @@ export const createTask = (req, res) => {
     description: ''
   });
 
+  console.log('newTask', newTask);
+
   newTask.save(function (err, doc) {
     if (err) return res.status(500).json(err);
     res.status(200).json(doc);
