@@ -73,9 +73,9 @@ userSchema.methods = {
   }
 };
 
-// userSchema.pre('deleteMany', function (next) {
-//   this.model('Task').deleteOne({ user_id: this._id }, next);
-// });
+userSchema.pre('remove', function (next) {
+  this.model('Task').deleteMany({ user_id: this._id }, next);
+});
 
 const User = mongoose.model('User', userSchema);
 
