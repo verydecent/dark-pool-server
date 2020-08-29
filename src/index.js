@@ -34,8 +34,8 @@ connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
       // models.User.deleteMany({}),
-      models.Task.deleteMany({}),
-      models.Subtask.deleteMany({})
+      // models.Task.deleteMany({}),
+      // models.Subtask.deleteMany({})
     ]);
   }
 
