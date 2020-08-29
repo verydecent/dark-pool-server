@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 
 // Reinitialize database if set to true
 
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
