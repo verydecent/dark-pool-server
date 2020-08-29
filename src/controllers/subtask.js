@@ -1,4 +1,5 @@
 import models from '../models';
+import { mongoose } from 'mongoose';
 
 export const createSubtask = (req, res) => {
     const { task_id } = req.params;
@@ -38,9 +39,26 @@ export const readSubtask = (req, res) => {
 };
 
 export const updateSubtask = (req, res) => {
-    models.Subtask.findByIdAndUpdate(req.params.subtask_id, req.body, { new: true }, function (err, doc) {
-        if (err) res.status(500).json(err)
-        res.status(200).json(doc);
+    console.log('req.params', req.params);
+    const { task_id, subtask_id } = req.params;
+    const { complete, description } = req.body;
+
+    models.Task.findOne({ _id: task_id }, function (err, doc) {
+        const updatedSubtasks = doc.subtasks.map(subtask => {
+            // subtask._id typeof equates to object, so we have to turn it into a string if we use strict comparison operator
+            const subtaskIdToString = subtask._id.toString();
+            if (subtaskIdToString === subtask_id) {
+                subtask.complete = complete;
+                subtask.description = description;
+            }
+            return subtask;
+        });
+
+        doc.subtasks = updatedSubtasks;
+        doc.save(function (err, doc) {
+            if (err) res.status(500).json(err);
+            res.status(200).json(doc);
+        });
     });
 };
 
