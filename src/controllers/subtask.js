@@ -11,12 +11,9 @@ export const createSubtask = (req, res) => {
     });
 
     models.Task.findOne({ _id: task_id }, function (err, doc) {
-
-        console.log('doc', doc);
         const task = doc;
         task.subtasks.push(newSubtask)
         task.save(function (err, doc) {
-            console.log('saved subtask', doc);
             if (err) res.status(500).json(err);
             res.status(200).json(doc);
         });
