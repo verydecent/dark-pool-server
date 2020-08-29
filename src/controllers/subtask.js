@@ -1,15 +1,24 @@
 import models from '../models';
 
 export const createSubtask = (req, res) => {
+    const { task_id } = req.params;
+
     const newSubtask = new models.Subtask({
         complete: false,
         description: '',
-        task_id: req.params.task_id
+        task_id: task_id
     });
 
-    newSubtask.save(function (err, doc) {
-        if (err) res.status(500).json(err);
-        res.status(200).json(doc);
+    models.Task.findOne({ _id: task_id }, function (err, doc) {
+
+        console.log('doc', doc);
+        const task = doc;
+        task.subtasks.push(newSubtask)
+        task.save(function (err, doc) {
+            console.log('saved subtask', doc);
+            if (err) res.status(500).json(err);
+            res.status(200).json(doc);
+        });
     });
 };
 
