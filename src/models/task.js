@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Subtask from './subtask';
 
 const taskSchema = new mongoose.Schema({
   title: {
@@ -10,7 +11,8 @@ const taskSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  subtasks: [Subtask.schema]
 },
   { timestamps: true }
 );

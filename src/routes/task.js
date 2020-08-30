@@ -33,9 +33,6 @@ router.delete('/:task_id', deleteTask);
 // Post
 router.post('/:task_id/subtask', createSubtask);
 
-// Get
-// router.get();
-
 // Put/Patch
 router.put('/:task_id/subtask/:subtask_id', updateSubtask);
 
