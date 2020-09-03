@@ -16,7 +16,7 @@ const router = Router();
 // *** Task Routes ***
 
 // Post
-router.post('/', createTask);
+router.post('/:user_id', createTask);
 
 // Get
 router.get('/:user_id', readTask);

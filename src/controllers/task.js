@@ -36,9 +36,9 @@ export const readTask = (req, res) => {
 }
 
 export const createTask = (req, res) => {
-  console.log('POST request for TASK', req.body);
+  const { user_id } = req.params;
   const newTask = new models.Task({
-    user_id: req.body.user_id,
+    user_id: user_id,
     title: '',
     description: ''
   });
