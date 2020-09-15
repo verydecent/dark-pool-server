@@ -20,24 +20,10 @@ const router = Router();
 
 
 
-
-
 // *** Task Routes ***
 
 // Get
 router.get('/:user_id', readTask);
-
-// Get by Day
-router.get('/:user_id/day', readByDay);
-
-// Get by Week
-router.get('/:user_id/week', readByWeek);
-
-// Get by Month
-router.get('/:user_id/month', readByMonth);
-
-// Get by Year
-router.get('/:user_id/year', readByYear);
 
 // Post
 router.post('/:user_id', createTask);
@@ -48,8 +34,6 @@ router.put('/:task_id', updateTask);
 
 // Delete
 router.delete('/:task_id', deleteTask);
-
-
 
 
 
