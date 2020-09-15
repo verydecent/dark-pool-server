@@ -3,7 +3,11 @@ import {
   createTask,
   updateTask,
   deleteTask,
-  readTask
+  readTask,
+  readByDay,
+  readByWeek,
+  readByMonth,
+  readByYear
 } from '../controllers/task';
 import {
   createSubtask,
@@ -13,13 +17,30 @@ import {
 
 const router = Router();
 
-// *** Task Routes ***
 
-// Post
-router.post('/:user_id', createTask);
+
+
+
+
+// *** Task Routes ***
 
 // Get
 router.get('/:user_id', readTask);
+
+// Get by Day
+router.get('/:user_id/day', readByDay);
+
+// Get by Week
+router.get('/:user_id/week', readByWeek);
+
+// Get by Month
+router.get('/:user_id/month', readByMonth);
+
+// Get by Year
+router.get('/:user_id/year', readByYear);
+
+// Post
+router.post('/:user_id', createTask);
 
 // Put/Patch
 router.put('/:task_id', updateTask);
@@ -27,6 +48,11 @@ router.put('/:task_id', updateTask);
 
 // Delete
 router.delete('/:task_id', deleteTask);
+
+
+
+
+
 
 // *** Subtask Routes ***
 
