@@ -1,13 +1,13 @@
-import models from '../models';
-import jwt from 'jsonwebtoken';
-import sgMail from '@sendgrid/mail';
-import expressJwt from 'express-jwt';
-import _ from 'lodash';
+const models = require('../models');
+const jwt = require('jsonwebtoken');
+const sgMail = require('@sendgrid/mail');
+const expressJwt = require('express-jwt');
+const _ = require('lodash');
 sgMail.setApiKey(process.env.SENDGRID_SANDBOX_API_KEY);
 
 // Password reset
 
-export const forgotPassword = (req, res) => {
+const forgotPassword = (req, res) => {
   const { email } = req.body;
 
   models.User.findOne({ email }, (err, user) => {
@@ -58,12 +58,12 @@ export const forgotPassword = (req, res) => {
   });
 }
 
-export const resetPassword = (req, res) => {
+const resetPassword = (req, res) => {
   console.log('Reset Password Route')
   const { resetPasswordLink, newPassword } = req.body;
 
   if (resetPasswordLink) {
-    jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, function(err, decoded) {
+    jwt.verify(resetPasswordLink, process.env.JWT_RESET_PASSWORD, function (err, decoded) {
       if (err) {
         return res.json({
           error: 'Expired link try again'
@@ -104,9 +104,9 @@ export const resetPassword = (req, res) => {
 // Admin middleware 
 // Resources only admin can see
 
-export const adminMiddleware = (req, res, next) => {
+const adminMiddleware = (req, res, next) => {
   models.User.findById({ _id: req.user.id }).exec((err, user) => {
-    if (err ||!user) {
+    if (err || !user) {
       return res.status(400).json({
         error: 'User not found'
       });
@@ -125,17 +125,17 @@ export const adminMiddleware = (req, res, next) => {
 
 // Middleware that requires JWT and checks if it was from our server
 
-export const requireLogin = expressJwt({
+const requireLogin = expressJwt({
   secret: process.env.JWT_SECRET,
   algorithms: ['HS256']
 });
 
-export const login = (req, res) => {
+const login = (req, res) => {
   const { email, password } = req.body;
 
   models.User.findOne({ email }).exec((err, user) => {
     // Check if user exist
-    if (err ||!user) {
+    if (err || !user) {
       return res.status(400).json({
         error: 'User with that email does not exist. Please register'
       });
@@ -147,7 +147,7 @@ export const login = (req, res) => {
         error: 'Email and password does not match'
       });
     }
-    
+
     // Generate token and send to client if authenticated
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '3d' });
 
@@ -160,7 +160,7 @@ export const login = (req, res) => {
   });
 }
 
-export const register = (req, res) => {
+const register = (req, res) => {
   const { username, email, password } = req.body;
 
   models.User.findOne({ email }).exec((err, user) => {
@@ -201,11 +201,11 @@ export const register = (req, res) => {
   });
 }
 
-export const accountActivation = (req, res) => {
+const accountActivation = (req, res) => {
   const { token } = req.body;
 
   if (token) {
-    jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION_SECRET, function(err, decoded) {
+    jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION_SECRET, function (err, decoded) {
       if (err) {
         console.log('JWT account verification error', err);
         return res.json({
@@ -236,4 +236,14 @@ export const accountActivation = (req, res) => {
       message: 'Server error, please try signing up again'
     });
   }
+}
+
+module.export = {
+  forgotPassword,
+  resetPassword,
+  adminMiddleware,
+  requireLogin,
+  login,
+  register,
+  accountActivation
 }
