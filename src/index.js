@@ -6,12 +6,13 @@ import morgan from 'morgan';
 import models, { connectDb } from './models';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Application level middleware
 
 // app.use(cors()); // Allows all origins
 if (process.env.ENVIRONMENT === 'development') {
-  app.use(cors({ origin: ['http://localhost:1024', 'https://hoppscotch.io'] }));
+  app.use(cors({ origin: ['http://localhost:1024'] }));
 }
 app.use(morgan('dev'));
 app.use(express.json());
@@ -19,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/auth', routes.auth);
 app.use('/task', routes.task);
-app.use('/subtask', routes.subtask);
 app.use('/user', routes.user);
 
 app.get('/', (req, res) => {
@@ -28,21 +28,21 @@ app.get('/', (req, res) => {
 
 // Reinitialize database if set to true
 
-const eraseDatabaseOnSync = true;
+const eraseDatabaseOnSync = false;
 
 connectDb().then(async () => {
   if (eraseDatabaseOnSync) {
     await Promise.all([
       // models.User.deleteMany({}),
-      models.Task.deleteMany({}),
-      models.Subtask.deleteMany({})
+      // models.Task.deleteMany({}),
+      // models.Subtask.deleteMany({})
     ]);
   }
 
   // createUsersWithTasks();
 
   app.listen(process.env.PORT, () =>
-    console.log(`App listening on Port ${process.env.PORT}`));
+    console.log(`App listening on Port ${PORT}`));
 }
 );
 
