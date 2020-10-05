@@ -3,37 +3,50 @@ import {
   createTask,
   updateTask,
   deleteTask,
-  readTask
+  readTask,
+  readByDay,
+  readByWeek,
+  readByMonth,
+  readByYear
 } from '../controllers/task';
+import {
+  createSubtask,
+  updateSubtask,
+  deleteSubtask,
+} from '../controllers/subtask';
 
 const router = Router();
 
-/*
-These are for data graphs
-// Get all tasks of the year
-- beginning date of current year
-- last date of current year
 
-// Get monthly task
-- beginning date of current month
-- last date of current month
 
-// Get weekly tasks
-- beginning date of current week
-- last date of current week
 
-// Get daily task
-- 
-*/
+// *** Task Routes ***
 
-// Route for componenetDidMount on the daily view
-
+// Get
 router.get('/:user_id', readTask);
 
-router.post('/', createTask);
+// Post
+router.post('/:user_id', createTask);
 
+// Put/Patch
 router.put('/:task_id', updateTask);
 
+
+// Delete
 router.delete('/:task_id', deleteTask);
+
+
+
+
+// *** Subtask Routes ***
+
+// Post
+router.post('/:task_id/subtask', createSubtask);
+
+// Put/Patch
+router.put('/:task_id/subtask/:subtask_id', updateSubtask);
+
+// Delete
+router.delete('/:task_id/subtask/:subtask_id', deleteSubtask);
 
 export default router;
