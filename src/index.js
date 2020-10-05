@@ -6,12 +6,13 @@ import morgan from 'morgan';
 import models, { connectDb } from './models';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Application level middleware
 
 // app.use(cors()); // Allows all origins
 if (process.env.ENVIRONMENT === 'development') {
-  app.use(cors({ origin: ['http://localhost:1024', 'https://hoppscotch.io'] }));
+  app.use(cors({ origin: ['http://localhost:1024'] }));
 }
 app.use(morgan('dev'));
 app.use(express.json());
@@ -41,7 +42,7 @@ connectDb().then(async () => {
   // createUsersWithTasks();
 
   app.listen(process.env.PORT, () =>
-    console.log(`App listening on Port ${process.env.PORT}`));
+    console.log(`App listening on Port ${PORT}`));
 }
 );
 
