@@ -1,6 +1,6 @@
-import models from '../models';
+const models = require('../models');
 
-export const readTask = (req, res) => {
+const readTask = (req, res) => {
   const { user_id } = req.params;
   const { start_date, end_date } = req.query;
 
@@ -15,7 +15,7 @@ export const readTask = (req, res) => {
   });
 }
 
-export const createTask = (req, res) => {
+const createTask = (req, res) => {
   const { user_id } = req.params;
   const newTask = new models.Task({
     user_id: user_id,
@@ -31,7 +31,7 @@ export const createTask = (req, res) => {
   });
 };
 
-export const updateTask = (req, res) => {
+const updateTask = (req, res) => {
   console.log('PUT request for TASK', req.body);
 
   models.Task.findByIdAndUpdate(req.params.task_id, req.body, { new: true }, function (err, doc) {
@@ -41,7 +41,7 @@ export const updateTask = (req, res) => {
   });
 };
 
-export const deleteTask = (req, res) => {
+const deleteTask = (req, res) => {
   console.log('task delete route', req.params.task_id);
   models.Task.findOne({ _id: req.params.task_id }, function (err, doc) {
     if (err || !doc) res.status(400).json(err);
@@ -52,3 +52,10 @@ export const deleteTask = (req, res) => {
     });
   });
 };
+
+module.exports = {
+  readTask,
+  createTask,
+  updateTask,
+  deleteTask
+}

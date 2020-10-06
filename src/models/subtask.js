@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const subtaskSchema = new mongoose.Schema({
   task_id: {
@@ -11,10 +11,10 @@ const subtaskSchema = new mongoose.Schema({
   description: {
     type: String
   }
-  },
+},
   { timestamps: true }
 );
 
 const Subtask = mongoose.model('Subtask', subtaskSchema);
 
-export default Subtask;
+module.exports = Subtask;

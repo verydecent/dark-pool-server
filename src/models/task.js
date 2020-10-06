@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
-import Subtask from './subtask';
+const mongoose = require('mongoose');
+const Subtask = require('./subtask');
+console.log(Subtask)
 
 const taskSchema = new mongoose.Schema({
   title: {
@@ -23,4 +24,4 @@ taskSchema.pre('remove', function (next) {
 
 const Task = mongoose.model('Task', taskSchema);
 
-export default Task;
+module.exports = Task;

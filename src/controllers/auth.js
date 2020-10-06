@@ -238,7 +238,7 @@ const accountActivation = (req, res) => {
   }
 }
 
-module.export = {
+module.exports = {
   forgotPassword,
   resetPassword,
   adminMiddleware,

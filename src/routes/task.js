@@ -1,5 +1,5 @@
-import { Router } from 'express';
-import {
+const express = require('express');
+const {
   createTask,
   updateTask,
   deleteTask,
@@ -8,17 +8,14 @@ import {
   readByWeek,
   readByMonth,
   readByYear
-} from '../controllers/task';
-import {
+} = require('../controllers/task');
+const {
   createSubtask,
   updateSubtask,
   deleteSubtask,
-} from '../controllers/subtask';
+} = require('../controllers/subtask');
 
-const router = Router();
-
-
-
+const router = express.Router()
 
 // *** Task Routes ***
 
@@ -49,4 +46,4 @@ router.put('/:task_id/subtask/:subtask_id', updateSubtask);
 // Delete
 router.delete('/:task_id/subtask/:subtask_id', deleteSubtask);
 
-export default router;
+module.exports = router;

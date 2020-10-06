@@ -1,6 +1,6 @@
-import models from '../models';
+const models = require('../models');
 
-export const readUser = (req, res) => {
+const readUser = (req, res) => {
   const userId = req.params.id;
 
   models.User.findById(userId).exec((err, user) => {
@@ -18,7 +18,7 @@ export const readUser = (req, res) => {
   });
 };
 
-export const updateUser = (req, res) => {
+const updateUser = (req, res) => {
   console.log('Update User', req.user, 'Update Data', req.body);
 
   const { username, password } = req.body;
@@ -67,4 +67,9 @@ export const updateUser = (req, res) => {
       res.json(user);
     });
   });
+}
+
+module.exports = {
+  readUser,
+  updateUser
 }

@@ -1,9 +1,7 @@
-import { Router } from 'express';
-import { register, login, accountActivation, forgotPassword, resetPassword } from '../controllers/auth';
-import { userRegistrationValidator, userLoginValidator, forgotPasswordValidator, resetPasswordValidator } from '../validators/auth';
-import { runValidation } from '../validators';
-
-const router = Router();
+const router = require('express').Router();
+const { register, login, accountActivation, forgotPassword, resetPassword } = require('../controllers/auth');
+const { userRegistrationValidator, userLoginValidator, forgotPasswordValidator, resetPasswordValidator } = require('../validators/auth');
+const { runValidation } = require('../validators');
 
 router.get('/', (req, res) => {
   res.json({ message: 'Auth Route Get Success' });
@@ -21,4 +19,4 @@ router.post('/forgot-password', forgotPasswordValidator, runValidation, forgotPa
 // Confirm reset password
 router.post('/reset-password', resetPasswordValidator, runValidation, resetPassword);
 
-export default router;
+module.exports = router;  

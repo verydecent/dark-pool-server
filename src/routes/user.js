@@ -1,8 +1,6 @@
-import { Router } from 'express';
-import { readUser, updateUser } from '../controllers/user';
-import { requireLogin, adminMiddleware } from '../controllers/auth';
-
-const router = Router();
+const router = require('express').Router();
+const { readUser, updateUser } = require('../controllers/user');
+const { requireLogin, adminMiddleware } = require('../controllers/auth');
 
 // Retrieve user info based on user id
 router.get('/:id', requireLogin, readUser);
@@ -13,4 +11,4 @@ router.put('/', requireLogin, updateUser);
 // Update Admin user info
 router.put('/admin', requireLogin, adminMiddleware, updateUser);
 
-export default router;
+module.exports = router;

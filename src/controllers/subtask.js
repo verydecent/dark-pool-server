@@ -1,6 +1,6 @@
-import models from '../models';
+const models = require('../models');
 
-export const createSubtask = (req, res) => {
+const createSubtask = (req, res) => {
     const { task_id } = req.params;
 
     const newSubtask = new models.Subtask({
@@ -19,7 +19,7 @@ export const createSubtask = (req, res) => {
     });
 };
 
-export const updateSubtask = (req, res) => {
+const updateSubtask = (req, res) => {
     const { task_id, subtask_id } = req.params;
     const { complete, description } = req.body;
 
@@ -42,7 +42,7 @@ export const updateSubtask = (req, res) => {
     });
 };
 
-export const deleteSubtask = (req, res) => {
+const deleteSubtask = (req, res) => {
     const { task_id, subtask_id } = req.params;
 
     models.Task.findOne({ _id: task_id }, function (err, doc) {
@@ -63,3 +63,9 @@ export const deleteSubtask = (req, res) => {
         });
     });
 };
+
+module.exports = {
+    createSubtask,
+    updateSubtask,
+    deleteSubtask
+}
