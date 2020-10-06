@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Subtask = require('./subtask');
-console.log(Subtask)
 
 const taskSchema = new mongoose.Schema({
   title: {
