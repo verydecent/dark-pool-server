@@ -20,13 +20,18 @@ const PORT = process.env.PORT || 3000;
 // Application level middleware
 
 // app.use(cors()); // Allows all origins
+
+let corsUrl;
+
 if (process.env.ENVIRONMENT === 'development') {
-  app.use(cors({ origin: ['http://localhost:1024'] }));
+  corsUrl = 'http://localhost:1024';
 }
 
 if (process.env.ENVIRONMENT === 'production') {
-  app.use(cors({ origin: ['https://darkpool.netlify.com'] }));
+  corsUrl = 'https://darkpool.netlify.com';
 }
+
+app.use(cors({ origin: corsUrl }));
 
 app.use(morgan('dev'));
 app.use(express.json());
