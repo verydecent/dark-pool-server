@@ -28,7 +28,7 @@ if (process.env.ENVIRONMENT === 'development') {
 }
 
 if (process.env.ENVIRONMENT === 'production') {
-  corsUrl = 'https://darkpool.netlify.com';
+  corsUrl = 'https://darkpool.netlify.app';
 }
 
 app.use(cors({ origin: corsUrl }));
