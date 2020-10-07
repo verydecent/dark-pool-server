@@ -24,6 +24,10 @@ if (process.env.ENVIRONMENT === 'development') {
   app.use(cors({ origin: ['http://localhost:1024'] }));
 }
 
+if (process.env.ENVIRONMENT === 'production') {
+  app.use(cors({ origin: ['http://darkpool.netlify.com'] }));
+}
+
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
