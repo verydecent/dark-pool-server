@@ -4,7 +4,6 @@ const cors = require('cors');
 const routes = require('./routes');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const models = require('./models');
 
 const connectDb = () => {
   return mongoose.connect(process.env.MONGO_URI, {
@@ -37,21 +36,7 @@ app.get('/', (req, res) => {
   res.send('API 200');
 });
 
-// Reinitialize database if set to true
-
-const eraseDatabaseOnSync = false;
-
 connectDb().then(async () => {
-  if (eraseDatabaseOnSync) {
-    await Promise.all([
-      // models.User.deleteMany({}),
-      // models.Task.deleteMany({}),
-      // models.Subtask.deleteMany({})
-    ]);
-  }
-
-  // createUsersWithTasks();
-
   app.listen(process.env.PORT, () =>
     console.log(`App listening on Port ${PORT}`));
 });
